@@ -276,7 +276,7 @@ export function sceneCourt() {
 }
 
 // ---------------------------------------------------------------- S5: the flower valley pavilion (云韵)
-export function sceneFlowers() {
+export function sceneFlowers(opt = {}) {
   const S = base({ sky: { top: 0x2b2f5e, mid: 0xd98a86, bot: 0xf8c79c, hMid: 0.09, sunDir: [0.75, 0.05, -0.65], sunCol: 0xff9a66, sunDisc: 0.7, cloud: 0.55, cloudCol: 0xffc7a0, cloudCol2: 0x7a587a },
     fog: new THREE.Fog(0xe3a690, 30, 330), fov: 35 });
   const { scene, cam } = S;
@@ -299,13 +299,15 @@ export function sceneFlowers() {
   const roof = tmesh(new THREE.ConeGeometry(3.4, 1.4, 4, 1), 0x2e3442, { th: 0.03 }); roof.rotation.y = PI / 4; roof.position.y = 3.9; pav.add(roof);
   pav.add(place(tmesh(new THREE.SphereGeometry(0.16, 12, 10), 0xd8a63a, { th: 0.01 }), 0, 4.65, 0));
   pav.add(place(tmesh(new THREE.BoxGeometry(3.7, 0.18, 3.7), 0x3a3f4c, { th: 0.02 }), 0, 3.2, 0));
-  const yy = place(figure('yunyun', { cloth: 0.03 }), -0.62, 0.4, 0.1, PI / 2 - 0.15); scene.add(yy); yy.userData.pose({ armL: [-0.15, -0.1], armR: [-0.15, 0.1] });
+  const yy = place(opt.yunyun ? opt.yunyun() : figure('yunyun', { cloth: 0.03 }), -0.62, 0.4, 0.1, PI / 2 - 0.15); scene.add(yy); yy.userData.pose({ armL: [-0.15, -0.1], armR: [-0.15, 0.1] });
   const xy = place(figure('xiaoyan', { cloth: 0.03 }), 0.72, 0.4, -0.05, -PI / 2 - 0.1); scene.add(xy);
+  if (opt.solo) { xy.visible = false; S.yy = yy; }
   const petals = makeParticles(1400, { mode: 'wrap', origin: [0, 3, 0], spread: [34, 12, 34], vel: [0.7, -0.45, 0.25], turb: 0.8, size: 0.055, colA: 0xffb7d0, colB: 0xfff4f8, alpha: 0.95, petal: true, blend: 'normal', seed: 9 });
   scene.add(petals);
   S.post = { ...S.post, bloom: [0.6, 0.6, 0.9], rim: 0xffc4a0, rimStr: 0.55, gain: [1.03, 0.98, 1.0], sat: 1.05, vig: 0.4 };
   S.update = (t) => {
     const lt = t - 21.5;
+    if (opt.solo) { opt.update?.(S, t); return; }
     xy.userData.pose(lerpPose(POSE.stand, POSE.salute, ease.inOut(sstep(1.0, 2.1, lt))));
     xy.userData.upper.rotation.x = 0.12 + 0.35 * sstep(1.8, 2.6, lt);
     yy.userData.pose({ armL: [-0.15, -0.1], armR: [-0.15, 0.1], head: 0.08 * sstep(2.2, 3.0, lt) });

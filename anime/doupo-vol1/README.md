@@ -49,6 +49,19 @@ node harness/render.mjs anime/doupo-vol1 --stills 14,35,60   # 只出几张静�
 export MG_CHROME=/path/to/chrome MG_GPU_ARGS="--no-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader"
 ```
 
+## 云韵 · 原创角色模型（设计稿 v1）
+
+按原著描写重新设计的云韵（青色系，原创造型，没有参照任何官方改编的角色设计）：`js/yunyun.js`。设计稿页面 `model.html` 有四种模式：
+
+```bash
+node harness/render.mjs anime/doupo-vol1 --page model.html --query mode=sheet --stills 0          # 三视图 + 配色
+node harness/render.mjs anime/doupo-vol1 --page model.html --query mode=face --stills 0,0.62      # 面部特写
+node harness/render.mjs anime/doupo-vol1 --page model.html --query mode=turn --noaudio --out anime/doupo-vol1/out/yunyun_turntable.mp4   # 8 秒转台
+node harness/render.mjs anime/doupo-vol1 --page model.html --query mode=scene --noaudio --out anime/doupo-vol1/out/yunyun_flowers.mp4    # 花海镜头
+```
+
+短片里的人物目前仍是旧的简化造型；新模型确认后再推广到其他角色并重渲。
+
 ## 已知局限
 
 - 没有配音，台词用字幕呈现。

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>云韵 · 角色设计稿</title>
+<link rel="stylesheet" href="/node_modules/@fontsource/noto-serif-sc/500.css">
+<link rel="stylesheet" href="/node_modules/@fontsource/ma-shan-zheng/400.css">
+<script type="importmap">{"imports":{
+  "three":"/node_modules/three/build/three.module.js",
+  "three/addons/":"/node_modules/three/examples/jsm/",
+  "simplex-noise":"/node_modules/simplex-noise/dist/esm/simplex-noise.js"}}</script>
+<style>
+  html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:linear-gradient(180deg,#f3f6f2 0%,#dfe9e6 62%,#c8d8d4 100%)}
+  body[data-mode=scene]{background:#000}
+  #stage,#stage canvas{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  .ov{position:absolute;font-family:"Noto Serif SC",serif;color:#24484a;display:none}
+  body[data-mode=sheet] .ov{display:block}
+  #title{left:56px;top:40px}
+  #title b{font:400 74px "Ma Shan Zheng",serif;color:#1d5a5e;letter-spacing:.08em;margin-right:22px}
+  #title span{font:500 24px "Noto Serif SC";letter-spacing:.25em;color:#4f7270;vertical-align:14px}
+  .lab{bottom:44px;width:640px;text-align:center;font:500 24px "Noto Serif SC";letter-spacing:.6em;color:#4f7270}
+  #palette{right:56px;top:52px;display:none;gap:16px}
+  body[data-mode=sheet] #palette{display:flex}
+  .chip{font:500 17px "Noto Serif SC";color:#3c5e5c;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .chip i{display:block;width:44px;height:44px;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.25),inset 0 0 0 2px rgba(255,255,255,.6)}
+  #note{right:56px;bottom:20px;font:500 15px "Noto Serif SC";color:#7a908e;letter-spacing:.2em}
+</style></head>
+<body>
+<div id="stage"></div>
+<div class="ov" id="title"><b>云韵</b><span>角色设计稿 · 原创 · 按原著描写 · 青色系</span></div>
+<div class="ov" id="palette"></div>
+<div class="ov lab" style="left:0">正 面</div><div class="ov lab" style="left:640px">侧 面</div><div class="ov lab" style="left:1280px">背 面</div>
+<div class="ov" id="note">同人设计 · 非官方</div>
+<script>window.addEventListener("unhandledrejection",e=>console.error("UNHANDLED",e.reason&&e.reason.stack||e.reason));window.addEventListener("error",e=>console.error("ERR",e.message,e.filename,e.lineno));</script>
+<script type="module" src="./js/model.js"></script>
+</body></html>
