@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>斗破苍穹·续 无尽火域 第一卷 · 3D 动画</title>
+<link rel="stylesheet" href="/node_modules/@fontsource/noto-serif-sc/500.css">
+<link rel="stylesheet" href="/node_modules/@fontsource/noto-serif-sc/700.css">
+<link rel="stylesheet" href="/node_modules/@fontsource/ma-shan-zheng/400.css">
+<script type="importmap">{"imports":{
+  "three":"/node_modules/three/build/three.module.js",
+  "three/addons/":"/node_modules/three/examples/jsm/",
+  "simplex-noise":"/node_modules/simplex-noise/dist/esm/simplex-noise.js"}}</script>
+<style>
+  html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#000}
+  #stage,#stage canvas{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  #sub{position:absolute;left:0;right:0;top:980px;height:100px;display:flex;align-items:center;justify-content:center;
+    font:500 37px/1.2 "Noto Serif SC",serif;letter-spacing:.08em;color:#f4ecdc;opacity:0;
+    text-shadow:0 0 14px rgba(255,170,90,.25),0 2px 2px rgba(0,0,0,.9)}
+  #chap{position:absolute;right:120px;top:150px;display:flex;flex-direction:row-reverse;gap:18px;opacity:0;
+    writing-mode:vertical-rl;color:#f6dfae;text-shadow:0 0 18px rgba(255,150,60,.55),0 2px 3px rgba(0,0,0,.8)}
+  #chapNo{font:500 30px "Noto Serif SC",serif;letter-spacing:.35em;opacity:.85;padding-top:8px}
+  #chapName{font:400 86px "Ma Shan Zheng",serif;letter-spacing:.12em}
+  #chap .seal{writing-mode:horizontal-tb;width:14px;height:14px;background:#b8261c;border-radius:2px;margin-top:12px;box-shadow:0 0 8px rgba(255,80,40,.6)}
+  #title{position:absolute;left:0;right:0;top:300px;text-align:center;opacity:0;color:#fff}
+  #title .pre{font:500 34px "Noto Serif SC",serif;letter-spacing:.6em;color:#f2d9a8;text-shadow:0 0 16px rgba(255,140,50,.5)}
+  #title .main{font:400 210px/1.15 "Ma Shan Zheng",serif;margin:18px 0 6px;
+    background:linear-gradient(180deg,#fff6dc 0%,#ffd27a 38%,#ff8a2a 72%,#c8401a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 22px rgba(255,120,40,.55)) drop-shadow(0 4px 2px rgba(0,0,0,.7))}
+  #title .vol{font:700 40px "Noto Serif SC",serif;letter-spacing:.5em;color:#f6e6c6;text-shadow:0 2px 3px rgba(0,0,0,.8)}
+  #title .note{position:absolute;left:0;right:0;top:640px;font:500 20px "Noto Serif SC",serif;letter-spacing:.3em;color:rgba(240,225,200,.7)}
+</style></head>
+<body>
+<div id="stage"></div>
+<div id="chap"><div id="chapNo"></div><div id="chapName"></div><div class="seal"></div></div>
+<div id="title"><div class="pre">斗破苍穹·续</div><div class="main">无尽火域</div><div class="vol">第一卷 · 火种</div>
+  <div class="note">同人创作 · 非官方 · 人物与世界观归原作者天蚕土豆所有</div></div>
+<div id="sub"></div>
+<script>window.addEventListener("unhandledrejection",e=>console.error("UNHANDLED",e.reason&&e.reason.stack||e.reason));window.addEventListener("error",e=>console.error("ERR",e.message,e.filename,e.lineno));</script>
+<script type="module" src="./js/main.js"></script>
+</body></html>

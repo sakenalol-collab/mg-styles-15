@@ -11,3 +11,6 @@ demos/*/out/stills/
 *.blend
 *.blend1
 *.npz
+
+# anime/: rendered output (video, audio, stills) stays out of git
+anime/*/out/
