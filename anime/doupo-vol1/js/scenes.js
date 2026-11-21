@@ -432,9 +432,9 @@ export function sceneTunnel() {
     vertexShader: `varying vec3 vP; void main(){ vP = position; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.0); }`,
     fragmentShader: NOISE + `uniform float uTime; varying vec3 vP;
       void main(){ float a = atan(vP.y, vP.x); float z = vP.z;
-        float tw = a + z*0.004 + uTime*0.25;
-        vec2 q = vec2(tw*1.6, z*0.01 + uTime*1.6);
-        float n = fbm(vec2(q.x*2.0, q.y)); float n2 = fbm(vec2(q.x*6.0 + 3.0, q.y*2.5));
+        float tw = a + z*0.004 + uTime*0.25; float zz = z*0.01 + uTime*1.6;
+        vec3 c3 = vec3(cos(tw), sin(tw), 0.0);
+        float n = fbm3(vec3(c3.xy*1.1, zz)); float n2 = fbm3(vec3(c3.xy*3.2 + 7.0, zz*2.5));
         float st = smoothstep(0.58, 0.86, n2);
         vec3 c = mix(vec3(0.03,0.025,0.06), vec3(0.3,0.26,0.42), n*n*1.6) + vec3(0.8,0.7,1.2)*st*0.55 + vec3(1.4,0.8,0.35)*smoothstep(0.8, 0.9, n2)*0.7;
         c *= 0.55 + 0.45*smoothstep(-900.0, -200.0, z);
@@ -623,7 +623,7 @@ export function sceneIce() {
     // fire timeline
     const R = 400 * ease.out(sstep(49.5, 51.8, t));
     const fireOn = sstep(49.4, 49.9, t);
-    gfire.material.uniforms.uR.value = R; field.material.uniforms.uReveal.value = R;
+    gfire.material.uniforms.uR.value = R; field.material.uniforms.uReveal.value = R; field.material.uniforms.uGain.value = t > 55.2 ? 0.07 : 0.11;
     feet.material.uniforms.uGain.value = 1.3 * fireOn * (t > 51.6 && t < 55.2 ? 0.25 : 1); feet.visible = fireOn > 0;
     embers.material.uniforms.uAlpha.value = sstep(50, 51.5, t) * 1.1;
     fireLight.intensity = 22 * fireOn;
@@ -681,7 +681,7 @@ export function sceneIce() {
         tv.copy(lotusStart).multiplyScalar((1 - u) * (1 - u)).add(p1.clone().multiplyScalar(2 * u * (1 - u))).add(WOUND.clone().multiplyScalar(u * u));
         lotus.position.copy(tv); lotus.scale.setScalar(lerp(0.42, 60, u * u)); }
       lotusTrail.material.uniforms.uOrigin.value.copy(lotus.position); lotusTrail.material.uniforms.uSpread.value.setScalar(lotus.scale.x * 1.5);
-      lotusTrail.material.uniforms.uSize.value = 0.2 * Math.max(1, lotus.scale.x * 2);
+      lotusTrail.material.uniforms.uSize.value = Math.min(1.2, 0.2 * Math.max(1, lotus.scale.x * 2));
     }
     lotusTrail.material.uniforms.uAlpha.value = lotus.visible && t > 55.0 ? 1 : 0;
     boom.scale.setScalar(lerp(60, 900, ease.out(sstep(55.6, 56.4, t)))); boom.material.uniforms.uInt.value = 1.4 * sstep(55.58, 55.65, t) * (1 - sstep(55.7, 56.5, t));
