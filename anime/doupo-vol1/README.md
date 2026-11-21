@@ -62,6 +62,22 @@ node harness/render.mjs anime/doupo-vol1 --page model.html --query mode=scene --
 
 短片里的人物目前仍是旧的简化造型；新模型确认后再推广到其他角色并重渲。
 
+## 云韵 · 写实 CG（Blender，实验中）
+
+`blender/yunyun_real.py` 用 Blender 生成写实版的原创云韵（青色交领、半披发、青玉簪、白玉兰）：
+身体和头部底模来自 Blender 官方的 CC0 [Human Base Meshes](https://download.blender.org/demo/asset-bundles/human-base-meshes/)，
+其余全部由脚本生成，包括脸部微调、次表面散射皮肤、带角膜和虹膜的眼睛、发丝级的眉毛、睫毛和约 7 万根头发、衣服和饰品、灯光。
+
+在装了 Blender（已在 5.3 上测试）和 NVIDIA 显卡的电脑上：
+
+```bash
+blender -b -P anime/doupo-vol1/blender/yunyun_real.py -- --out yunyun.png --device OPTIX --res 2400x3000 --samples 512 --hair 150000 --save-blend yunyun.blend
+```
+
+- 不传 `--bundle` 时会自动下载底模包（约 50 MB），缓存在 `~/.cache/yunyun_real/`。
+- `--shot portrait|face34|back` 选择机位；`--save-blend` 会把场景存成 .blend，之后可以在 Blender 里手动精修。
+- 没有显卡时加 `--device CPU`，速度会慢很多。
+
 ## 已知局限
 
 - 没有配音，台词用字幕呈现。
